@@ -214,5 +214,21 @@ public class A {
         return res;
     }
 
+    /*Необходимо реализовать метод таким образом,
+    чтобы он возвращал новый массив,
+    в котором записаны все элементы массива arr, кроме отрицательных.
+     */
+    public static int[] deleteNegative(int[] arr) {
+        var res1 = new int[arr.length];
+        int k = 0;
+        for (int i : arr){
+            if(i>=0){
+                res1[k++] = i;
+            }
+        }
+        var res = new int[k];
+        System.arraycopy(res1, 0,res,0,k);
+        return res;
+    }
 
 }
