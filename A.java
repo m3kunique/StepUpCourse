@@ -248,4 +248,17 @@ public class A {
         return res;
     }
 
+    /*
+    Необходимо реализовать метод таким образом,
+    чтобы он возвращал новый массив,
+    который будет содержать все элементы массива arr,
+    но в позицию pos будут вставлены значения массива ins.
+     */
+    public static int[] add(int[] arr, int[] ins, int pos) {
+        int[] res = new int[arr.length + ins.length];
+        System.arraycopy(arr, 0, res, 0, pos);
+        System.arraycopy(ins, 0, res, pos, ins.length);
+        System.arraycopy(arr, pos, res, pos+ins.length, arr.length-pos);
+        return res;
+    }
 }
