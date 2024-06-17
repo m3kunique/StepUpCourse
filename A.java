@@ -231,4 +231,21 @@ public class A {
         return res;
     }
 
+    /*
+    Необходимо реализовать метод таким образом,
+    чтобы он возвращал новый массив,
+    который будет содержать все элементы массива arr,
+    но в позицию pos будет вставлено значение x.
+     */
+    public static int[] add(int[] arr, int x, int pos) {
+        var res =new int[arr.length];
+        System.arraycopy(arr, 0, res,0,arr.length);
+        if (pos<arr.length){
+            res[pos]=x;
+            return res;
+        }
+        System.out.println("man, pos is too big");
+        return res;
+    }
+
 }
