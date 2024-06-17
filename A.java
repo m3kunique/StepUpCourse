@@ -196,13 +196,8 @@ public class A {
 
     public static int[] concat(int[] arr1, int[] arr2) {
         var res = new int[arr1.length + arr2.length];
-        int l = 0;
-        for (int i : arr1) {
-            res[l++] = i;
-        }
-        for (int i : arr2) {
-            res[l++] = i;
-        }
+        System.arraycopy(arr1, 0, res, 0, arr1.length);
+        System.arraycopy(arr2, 0, res, arr1.length, arr2.length);
         return res;
     }
 
@@ -218,5 +213,6 @@ public class A {
         System.arraycopy(res1, 0, res, 0, k);
         return res;
     }
+
 
 }
