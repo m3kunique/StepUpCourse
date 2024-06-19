@@ -261,4 +261,7 @@ public class A {
         System.arraycopy(arr, pos, res, pos+ins.length, arr.length-pos);
         return res;
     }
+
+
+
 }

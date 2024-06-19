@@ -2,8 +2,11 @@ import java.util.Arrays;
 
 public class StepUpCourse {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(A.add(new int[]{0,1,2,3}, new int[]{1, 2, 3}, 2)));
+        Name mishka = Name.ofPersonalAndFamily("Mishka", "Terentyev");
+        Name aliska = Name.ofPersonalAndFamily("Aliska", "Idrisova");
 
+        System.out.println(mishka.toString());
+        System.out.println(aliska.toString());
     }
 
 
