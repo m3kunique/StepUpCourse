@@ -1,32 +1,36 @@
 package OOP;
 
-import java.util.ArrayList;
-
 public class Start {
     public static void main(String[] args) {
-        Point p1 = new Point(1, 5);
-        Point p2 = new Point(2, 8);
-        Point p3 = new Point(5, 3);
-        Point p4 = new Point(8, 9);
-        ArrayList<Point> arr = new ArrayList<>();
-        arr.add(p1);
-        arr.add(p2);
-        arr.add(p3);
-        arr.add(p4);
+        City A = new City("A");
+        City B = new City("B");
+        City C = new City("C");
+        City D = new City("D");
+        City E = new City("E");
+        City F = new City("F");
 
-        BrokenLine bL = new BrokenLine(arr);
+        A.addPath(D, 6);
+        A.addPath(B, 5);
+        A.addPath(F, 1);
 
-        System.out.println(bL.length());
-        System.out.println(bL.toString());
-        System.out.println(bL.getArrOfLines());
-        double tmp = 0;
-        for (Line i : bL.getArrOfLines()) {
-            tmp += i.length();
-        }
-        System.out.println(tmp);
-        System.out.println(tmp == bL.length());
-        p2.setCoord(12, 8);
-        System.out.println(bL.length());
-        System.out.println(bL.toString());
+        B.addPath(A, 5);
+        B.addPath(C, 3);
+
+        C.addPath(B, 3);
+        C.addPath(B, 4);
+
+        D.addPath(A, 6);
+        D.addPath(C, 4);
+        D.addPath(E, 2);
+
+        E.addPath(F, 2);
+
+        F.addPath(E, 2);
+        F.addPath(B, 1);
+
+        System.out.println(B.travel(1));
+        System.out.println(B.travel(2));
+        System.out.println(B.travel(3));
+
     }
 }
