@@ -20,8 +20,8 @@ public class Line {
     }
 
     public double length() {
-        double x = (p1.x - p2.x);
-        double y = (p1.y - p2.y);
+        double x = (p1.getX() - p2.getX());
+        double y = (p1.getY() - p2.getY());
         return Math.sqrt(x * x + y * y);
     }
 }
