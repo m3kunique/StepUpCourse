@@ -1,58 +1,44 @@
 package OOP;
 
 public class Fraction {
-    private int numerator;
-    private int denominator;
+    private final int num, denum;
 
-    public Fraction(int numerator, int denominator) {
-        this.numerator = numerator;
-        if (denominator < 0) throw new IllegalArgumentException("сосать лол");
-        if (denominator == 0) throw new IllegalArgumentException("чел, ты не можешь делить на ноль");
-        this.denominator = denominator;
+    public Fraction(int num, int denum) {
+        this.num = num;
+        if (denum < 0) throw new IllegalArgumentException("сосо");
+        if (denum == 0) throw new IllegalArgumentException("сосо");
+        this.denum = denum;
     }
 
-    public Fraction sum(Fraction fraction) {
-        if (denominator == fraction.getDenominator())
-            return new Fraction(numerator + fraction.getNumerator(),
-                    denominator + fraction.getDenominator());
-        return new Fraction((numerator * fraction.getDenominator() + fraction.getNumerator() * denominator),
-                denominator * fraction.getDenominator());
+    public int getNum() {
+        return num;
+    }
+
+    public int getDenum() {
+        return denum;
+    }
+
+    public Fraction sum(Fraction f) {
+        if (denum == f.getDenum())
+            return new Fraction(num + f.getNum(), denum);
+        return new Fraction(num * f.getDenum() + f.getNum() * denum, f.denum * denum);
     }
 
     public Fraction sum(int x) {
-        return sum(new Fraction(numerator + x*denominator, denominator));
+        return new Fraction(num + x * denum, denum);
     }
 
-    public Fraction minus(Fraction fraction) {
-        if (denominator == fraction.getDenominator())
-            return new Fraction(numerator - fraction.getNumerator(),
-                    denominator - fraction.getDenominator());
-        return new Fraction(numerator * fraction.getDenominator() - fraction.getNumerator() * denominator,
-                denominator * fraction.getDenominator());
+    public Fraction minus(Fraction f){
+        if (denum == f.getDenum())
+            return new Fraction(num - f.getNum(), denum);
+        return new Fraction(num * f.getDenum() - f.getNum() * denum, denum * f.getDenum());
     }
 
     public Fraction minus(int x) {
-        return minus(new Fraction(numerator - x * denominator, denominator));
+        return new Fraction(num - x * denum, denum);
     }
-
-    public int getNumerator() {
-        return numerator;
-    }
-
-    public void setNumerator(int numerator) {
-        this.numerator = numerator;
-    }
-
-    public int getDenominator() {
-        return denominator;
-    }
-
-    public void setDenominator(int denominator) {
-        this.denominator = denominator;
-    }
-
     @Override
     public String toString() {
-        return String.format("%d/%d", numerator, denominator);
+        return String.format("%d/%d", this.getNum(), this.getDenum());
     }
 }
