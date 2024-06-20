@@ -22,6 +22,6 @@ public class Line {
     public double length() {
         double x = (p1.x - p2.x);
         double y = (p1.y - p2.y);
-        return Math.sqrt(x*x+y*y);
+        return Math.sqrt(x * x + y * y);
     }
 }

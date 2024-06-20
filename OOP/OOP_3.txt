@@ -1,0 +1,123 @@
+package OOP;
+
+import java.util.ArrayList;
+
+public class Start {
+    public static void main(String[] args) {
+        Point p1 = new Point(1, 5);
+        Point p2 = new Point(2, 8);
+        Point p3 = new Point(5, 3);
+        Point p4 = new Point(8, 9);
+        ArrayList<Point> arr = new ArrayList<>();
+        arr.add(p1);
+        arr.add(p2);
+        arr.add(p3);
+        arr.add(p4);
+
+        BrokenLine bL = new BrokenLine(arr);
+
+        System.out.println(bL.length());
+        System.out.println(bL.toString());
+        System.out.println(bL.getArrOfLines());
+        double tmp = 0;
+        for (Line i : bL.getArrOfLines()) {
+            tmp += i.length();
+        }
+        System.out.println(tmp);
+        System.out.println(tmp == bL.length());
+        p2.setCoord(12, 8);
+        System.out.println(bL.length());
+        System.out.println(bL.toString());
+    }
+}
+
+
+public class Point {
+    int x, y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setCoord(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    @Override
+    public String toString() {
+        return "[" + x +
+                ", " + y +
+                ']';
+    }
+}
+
+
+
+public class Line {
+    private Point p1;
+    private Point p2;
+
+    public Line(Point p1, Point p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+
+    public Line(int x1, int y1, int x2, int y2) {
+        this.p1 = new Point(x1, y1);
+        this.p2 = new Point(x2, y2);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Линия от %s до %s", p1.toString(), p2.toString());
+    }
+
+    public double length() {
+        double x = (p1.x - p2.x);
+        double y = (p1.y - p2.y);
+        return Math.sqrt(x * x + y * y);
+    }
+}
+
+
+public class BrokenLine {
+    ArrayList<Line> arr = new ArrayList<>();
+    private ArrayList<Point> arrIn = new ArrayList<>();
+
+
+    public BrokenLine() {
+
+    }
+
+    public BrokenLine(ArrayList<Point> arrOfPoints) {
+        this.arr = getArrOfLines(arrOfPoints);
+        this.arrIn = arrOfPoints;
+    }
+
+    public ArrayList<Line> getArrOfLines() {
+        return this.arr;
+    }
+
+    private ArrayList<Line> getArrOfLines(ArrayList<Point> arrIn) {
+        ArrayList<Line> arrOut = new ArrayList<>();
+        for (int i = 0; i < arrIn.size() - 1; i++) {
+            arrOut.add(new Line(arrIn.get(i), arrIn.get(i + 1)));
+        }
+        return arrOut;
+    }
+
+    public double length() {
+        double ret = 0;
+        for (Line i : arr) {
+            ret += i.length();
+        }
+        return ret;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Линия %s", arrIn.toString());
+    }
+}
