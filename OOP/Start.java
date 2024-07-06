@@ -13,6 +13,8 @@ public class Start {
         PolyLine closedLine = new ClosedLine(p1, p2, p3);
         System.out.println(a.getLength(closedLine));
 
-        System.out.println(a.getLength(polyLine, closedLine));
+        System.out.println(a.getLength(polyLine,
+                closedLine,
+                new StringWrapper("adf4", "456")));
     }
 }
