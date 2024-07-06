@@ -1,6 +1,6 @@
 package OOP;
 
-public class Line {
+public class Line implements Lengthable{
     private Point p1;
     private Point p2;
 
