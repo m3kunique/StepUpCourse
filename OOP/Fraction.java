@@ -1,6 +1,6 @@
 package OOP;
 
-public class Fraction extends Number {
+public class Fraction extends Number{
     private final int num, denum;
 
     public Fraction(int num, int denum) {
