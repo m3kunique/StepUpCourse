@@ -1,12 +1,10 @@
 package OOP;
 
-public class Fraction {
+public class Fraction extends Number {
     private final int num, denum;
 
     public Fraction(int num, int denum) {
         this.num = num;
-        if (denum < 0) throw new IllegalArgumentException("сосо");
-        if (denum == 0) throw new IllegalArgumentException("сосо");
         this.denum = denum;
     }
 
@@ -37,8 +35,29 @@ public class Fraction {
     public Fraction minus(int x) {
         return new Fraction(num - x * denum, denum);
     }
+
     @Override
     public String toString() {
         return String.format("%d/%d", this.getNum(), this.getDenum());
+    }
+
+    @Override
+    public int intValue() {
+        return (int) num/denum;
+    }
+
+    @Override
+    public long longValue() {
+        return (long) num/denum;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) num/denum;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) num/denum;
     }
 }
