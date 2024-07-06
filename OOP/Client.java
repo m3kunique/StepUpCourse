@@ -1,8 +1,6 @@
 package OOP;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Client {
     private final String name;

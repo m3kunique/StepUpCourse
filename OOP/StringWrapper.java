@@ -1,7 +1,7 @@
 package OOP;
 
 public class StringWrapper implements Lengthable{
-    private String[] strs;
+    private final String[] strs;
 
     public StringWrapper(String... strs) {
         this.strs=strs;

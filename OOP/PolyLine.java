@@ -1,8 +1,5 @@
 package OOP;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PolyLine implements Lengthable{
     Point[] points;
 
