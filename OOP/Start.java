@@ -11,6 +11,7 @@ public class Start {
         System.out.println(circle.square());
         System.out.println(rectengle.square());
     }
+
     public static double areaForAllFigures(Shapes... shapes) {
         double sum=0;
         for (Shapes shape : shapes) {
