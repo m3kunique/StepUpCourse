@@ -1,45 +1,17 @@
 package OOP;
 
-public class Square {
-    private int x, y;
+public class Square extends Shapes{
     private int length;
+    private Point lPoint;
 
-    public Square(int x, int y, int length) {
-        this.x = x;
-        this.y = y;
-        if (length<=0) throw new IllegalArgumentException("Это не квадрат, братик");
+    public Square(int length, Point lPoint) {
         this.length = length;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setX(int x) {
-        this.x=x;
-    }
-
-    public void setY(int y) {
-        this.y=y;
-    }
-
-    public void setLength(int length) {
-        if (length<=0) throw new IllegalArgumentException("Это не квадрат, братик");
-        this.length=length;
+        this.lPoint = lPoint;
     }
 
     @Override
-    public String toString() {
-        return String.format("Квадрат в точке [%d, %d] со стороной %d", this.getX(), this.getY(), this.getLength());
+    public double square() {
+        return length*length;
     }
-
 }
 
