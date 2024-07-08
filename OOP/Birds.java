@@ -1,5 +1,5 @@
 package OOP;
 
-public abstract class Birds {
-    public abstract void sing();
+public interface Birds {
+    void sing();
 }

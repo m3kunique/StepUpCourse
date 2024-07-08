@@ -2,7 +2,7 @@ package OOP;
 
 import java.util.Random;
 
-public class Parrot extends Birds{
+public class Parrot implements Birds{
     private final String text;
 
     public Parrot(String text) {
