@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class StepUpCourse {
     public static void main(String[] args) {
         Name mishka = Name.ofPersonalAndFamily("Mishka", "Terentyev");

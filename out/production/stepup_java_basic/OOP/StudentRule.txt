@@ -1,0 +1,52 @@
+public class Start {
+    public static void main(String[] args) {
+        var stud = new Student("Mikhaiil", x->x%2==0);
+        stud.addMark(4);
+        stud.addMark(5);
+        stud.addMark(6);
+        System.out.println(stud.toString());
+    }
+
+    public static double areaForAllFigures(Shapes... shapes) {
+        double sum=0;
+        for (Shapes shape : shapes) {
+            sum+=shape.square();
+        }
+        return sum;
+    }
+}
+
+public interface Rule {
+    boolean check(int x);
+}
+
+import java.util.ArrayList;
+
+public class Student {
+    private final String name;
+    private ArrayList<Integer> marks;
+    Rule b;
+
+    public Student(String name, Rule b) {
+        this.name = name;
+        this.b = b;
+        this.marks = new ArrayList<>();
+    }
+
+    public ArrayList<Integer> getMarks() {
+        return new ArrayList<>(marks); // Возвращаем копию списка для безопасности
+    }
+
+    public void addMark(int mark) {
+        if (b.check(mark)) {
+            marks.add(mark);
+        } else {
+            System.out.println("Оценка должна сохранять правило.");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Имя: %s, Оценки: %s", name, marks.toString());
+    }
+}
