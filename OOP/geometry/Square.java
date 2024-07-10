@@ -1,6 +1,6 @@
-package OOP;
+package OOP.geometry;
 
-public class Square extends Shapes{
+public class Square extends Shapes {
     private int length;
     private Point lPoint;
 
@@ -11,7 +11,7 @@ public class Square extends Shapes{
 
     @Override
     public double square() {
-        return length*length;
+        return length * length;
     }
 }
 

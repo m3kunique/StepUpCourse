@@ -1,4 +1,4 @@
-package OOP;
+package OOP.geometry;
 
 public class Point3D extends Point {
     int z;

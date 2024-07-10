@@ -1,4 +1,4 @@
-package OOP;
+package OOP.geometry;
 
 public class Rectangle extends Shapes {
     private int length, width;

@@ -1,6 +1,8 @@
-package OOP;
+package OOP.geometry;
 
-public class Line implements Lengthable{
+import OOP.Lengthable;
+
+public class Line implements Lengthable {
     private final Point p1;
     private final Point p2;
 

@@ -1,4 +1,4 @@
-package OOP;
+package OOP.geometry;
 
 public class Circle extends Shapes {
     private Point centre;

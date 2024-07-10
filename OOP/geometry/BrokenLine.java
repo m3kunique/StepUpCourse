@@ -1,4 +1,4 @@
-package OOP;
+package OOP.geometry;
 
 import java.util.ArrayList;
 

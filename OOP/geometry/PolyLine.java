@@ -1,6 +1,8 @@
-package OOP;
+package OOP.geometry;
 
-public class PolyLine implements Lengthable{
+import OOP.Lengthable;
+
+public class PolyLine implements Lengthable {
     Point[] points;
 
     public PolyLine(Point... points) {
