@@ -1,0 +1,195 @@
+package OOP.Mikhail;
+
+public class AccountNumberGenerator {
+    private static int x = 0;
+
+    public static int getNext() {
+        return ++x;
+    }
+
+    public static int getCurrent() {
+        return x;
+    }
+
+    public void reset() {
+        x = 0;
+    }
+}
+
+public class Currency {
+    private String currency;
+    private double value;
+    private int accountNumber;
+
+    public Currency(String currency, double value, int accountNumber) {
+        this.currency = currency;
+        this.value = value;
+        this.accountNumber = accountNumber;
+    }
+
+    public String getCurrency() {
+        return String.format("Валютный счет (%s): %f", currency, value);
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void replenishment(double value) {
+        this.value += value;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "currency='" + currency + '\'' +
+                ", value=" + value +
+                ", accountNumber=" + accountNumber +
+                '}';
+    }
+}
+
+
+public abstract class Account {
+    private double fee;
+    private Currency currency;
+
+    public Account(int accountNumber, double remains, double fee, String currency) {
+        this.fee = fee;
+        this.currency = new Currency(currency, remains, accountNumber);
+        System.out.printf("Создан счет\n%s\n", getCurrency().toString());
+    }
+
+    public Account(int accountNumber, double remains, double fee) {
+        this(accountNumber, remains, fee, "RUB");
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency, double fee) {;
+        this.fee = fee;
+        this.currency = currency;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
+    }
+
+//метод вычитающий комиссию из остатка
+    public void deductsTheCommission() {
+        double value = currency.getValue();
+        currency.replenishment(-value*fee);
+    }
+
+    public void debitingTheValue(double amount) {
+        currency.replenishment(-amount);
+        System.out.printf("Списано со счета: %f\nОстаток на счете: %f%n", amount, currency.getValue());
+    }
+
+//    пополнение счета на сумму value
+    public void replenishment(double value) {
+        currency.replenishment(value);
+    }
+
+}
+
+
+public class DebitAccount extends Account{
+
+    public DebitAccount(int accountNumber, double remains, double fee, String currency) {
+        super(accountNumber, remains, fee, currency);
+    }
+
+    public DebitAccount(int accountNumber, double remains, double fee) {
+        super(accountNumber, remains, fee);
+    }
+
+}
+
+
+import java.time.Year;
+
+public class CreditAccount extends Account {
+    private double interestRate = 0; // процентная ставка в процентах (надо будет на 100 делить)
+    private double creditLimit = 0; // кредитные лимит
+    private double accruedInterest = 0; //начисленнные проценты
+    private double accruedCommissions = 0; //начисленнные комиссионные
+
+
+    public CreditAccount(int accountNumber, double remains, double fee, String currency) {
+        super(accountNumber, remains, fee, currency);
+    }
+
+    public CreditAccount(int accountNumber, double remains, double fee) {
+        super(accountNumber, remains, fee);
+    }
+
+    public CreditAccount(int accountNumber, double remains, double fee,
+                         String currency, double interestRate, double creditLimit) {
+        super(accountNumber, remains, fee, currency);
+        this.interestRate = interestRate;
+        this.creditLimit = creditLimit;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public double getCreditLimit() {
+        return creditLimit;
+    }
+
+    public void setCreditLimit(double creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+
+    public double getAccruedInterest() {
+        return accruedInterest;
+    }
+
+    public double getAccruedCommissions() {
+        return accruedCommissions;
+    }
+
+    public void calculationOfInterest() {
+        double remains = super.getCurrency().getValue();
+        if (remains < creditLimit) {
+            accruedInterest += (creditLimit - remains)*(interestRate / (Year.now().isLeap() ? 366 : 365)) / 100;
+        }
+    }
+
+    @Override
+    public void deductsTheCommission() {
+        accruedCommissions += super.getFee();
+    }
+
+    @Override
+    public void replenishment(double value) {
+        double temp = value-accruedCommissions;
+        accruedCommissions -= Math.min(value, accruedCommissions);
+        if (temp > 0) {
+            value = temp - accruedInterest;
+            accruedInterest -= Math.min(temp,accruedInterest);
+            if (value > 0){
+                super.getCurrency().replenishment(value);
+                System.out.println(getCurrency().getValue());
+            }
+        }
+    }
+}
+
+

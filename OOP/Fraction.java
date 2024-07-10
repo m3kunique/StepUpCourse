@@ -1,6 +1,8 @@
 package OOP;
 
-public class Fraction extends Number{
+import java.util.Objects;
+
+public class Fraction extends Number implements Cloneable{
     private final int num, denum;
 
     public Fraction(int num, int denum) {
@@ -59,5 +61,25 @@ public class Fraction extends Number{
     @Override
     public double doubleValue() {
         return (double) num/denum;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Fraction other = (Fraction) object;
+        return num == other.num && denum == other.denum;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.num;
+        hash = 97 * hash + this.denum;
+        return hash;
+    }
+
+    public Fraction clone() throws CloneNotSupportedException  {
+        return (Fraction)super.clone();
     }
 }
