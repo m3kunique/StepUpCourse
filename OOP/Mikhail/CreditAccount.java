@@ -1,6 +1,7 @@
 package OOP.Mikhail;
 
 import java.time.Year;
+import java.util.Objects;
 
 public class CreditAccount extends Account {
     private double interestRate = 0; // процентная ставка в процентах (надо будет на 100 делить)
@@ -48,6 +49,15 @@ public class CreditAccount extends Account {
         return accruedCommissions;
     }
 
+    @Override
+    public void debitingTheValue(double amount) throws InsufficientFundsException{
+        var currency = super.getCurrency();
+        if (amount > currency.getValue()) throw new InsufficientFundsException("Недостаточно средств");
+        if (amount > creditLimit) throw new InsufficientFundsException("Превышен кредитный лимит");
+        currency.replenishment(-amount);
+        System.out.printf("Списано со счета: %f\nОстаток на счете: %f%n", amount, currency.getValue());
+    }
+
     public void calculationOfInterest() {
         double remains = super.getCurrency().getValue();
         if (remains < creditLimit) {
@@ -72,5 +82,24 @@ public class CreditAccount extends Account {
                 System.out.println(getCurrency().getValue());
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        CreditAccount that = (CreditAccount) object;
+        return Double.compare(this.getCurrency().getAccountNumber(), that.getCurrency().getAccountNumber()) == 0;
+    }
+
+    public int hashCode() {
+        int hash = 10000000;
+        hash ^= this.getCurrency().hashCode();
+        hash ^= getCurrency().hashCode();
+        hash ^= Double.hashCode(creditLimit);
+        hash ^= Double.hashCode(interestRate);
+        hash ^= Double.hashCode(accruedCommissions);
+
+        return hash;
     }
 }

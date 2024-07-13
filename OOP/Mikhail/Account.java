@@ -37,7 +37,8 @@ public abstract class Account {
         currency.replenishment(-value*fee);
     }
 
-    public void debitingTheValue(double amount) {
+    public void debitingTheValue(double amount) throws InsufficientFundsException{
+        if (amount > currency.getValue()) throw new InsufficientFundsException("Недостаточно средств");
         currency.replenishment(-amount);
         System.out.printf("Списано со счета: %f\nОстаток на счете: %f%n", amount, currency.getValue());
     }
@@ -47,4 +48,11 @@ public abstract class Account {
         currency.replenishment(value);
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "fee=" + fee +
+                ", currency=" + currency +
+                '}';
+    }
 }

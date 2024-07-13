@@ -11,6 +11,10 @@ public class Currency {
         this.accountNumber = accountNumber;
     }
 
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
     public String getCurrency() {
         return String.format("Валютный счет (%s): %f", currency, value);
     }
