@@ -1,9 +1,28 @@
 package OOP.Enum;
 
+import OOP.OperationAttemptException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println(op.DIV.operation(1,2));
+        try{
+            System.out.println(divide("text.txt"));
+        } catch (OperationAttemptException e) {
+            System.out.println(e);;
+        }
+    }
 
+    public static int divide(String fileName) throws OperationAttemptException{
+        try (Scanner sc = new Scanner(new File(fileName))){
+            return sc.nextInt() / sc.nextInt();
+        } catch (Exception ex) {
+            throw new OperationAttemptException(ex);
+        }
     }
 
     enum op {
